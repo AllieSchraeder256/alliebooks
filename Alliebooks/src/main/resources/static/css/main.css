@@ -1,0 +1,13 @@
+#property-row {
+	border: 1px solid #ccefff;
+	background-color: #FFAAAA;
+  	border-radius: 5px;
+  	margin: 5px 5px 5px 5px;
+  	padding-bottom: 10px;
+  	padding-left:10px;
+}
+
+#total-row {
+	font-weight: bold;
+	background-color: #e5efd7;
+}

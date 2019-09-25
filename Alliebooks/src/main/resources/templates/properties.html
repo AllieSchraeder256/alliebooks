@@ -1,0 +1,48 @@
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head lang="en">
+
+<title>Alliebooks</title>
+<!--/*/ <th:block th:include="fragments/headerinc :: head"></th:block> /*/-->
+
+</head>
+<body>
+	<div class="container">
+		<!--/*/ <th:block th:include="fragments/header :: header"></th:block> /*/-->
+		<div>
+			<h2>Properties</h2>
+			<div th:each="property : ${properties}" class="row"  th:if="${not #lists.isEmpty(properties)}">
+				<div class="row">
+					<div class="col-sm-12">
+						<h4 th:text="${property.name}"></h4>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-sm-2">
+						<img th:src="@{'/fetch-image?file=' + ${property.image}}" style="max-height: 120px; max-width: 150px; border-radius:5px;" />
+					</div>
+					<div class="col-sm-4">
+						<a th:href="${'/properties/edit/' + property.id}">Edit</a> 
+						<a th:href="${'/properties/delete/' + property.id}">Delete</a>
+						<p>
+						<p th:each="unit : ${property.units}"
+							th:text="${unit.name} + ' - ' + ${unit.currentTenant} +' - ' + ${#numbers.formatDecimal(unit.currentRent, 0, 'COMMA', 2, 'POINT')}" />
+					</div>
+					<div class="col-sm-6">
+						<p th:if="${property.roiReport} != null" th:text="'ROI: ' + ${property.roiReport?.roi} + '%'">
+						<p th:if="${property.roiReport} != null" th:text="'Expenses: ' + ${property.roiReport?.expenses}">
+						<p th:if="${property.roiReport} != null" th:text="'Income: ' + ${property.roiReport?.income}">
+					</div>
+				</div>
+				<hr>
+				
+			</div>
+			<div class="row">
+                <a href="/properties/new">New Property</a> 
+            </div>
+		</div>
+	</div>
+
+</body>
+</html>

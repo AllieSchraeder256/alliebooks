@@ -1,0 +1,69 @@
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head lang="en">
+
+<title>Alliebooks</title>
+
+<!--/*/ <th:block th:include="fragments/headerinc :: head"></th:block> /*/-->
+</head>
+<body>
+
+	<div class="container">
+		<!--/*/ <th:block th:include="fragments/header :: header"></th:block> /*/-->
+		<div>
+			<div class = "row">
+				<div class = "col-sm-3">
+					<h2>Expense List</h2>
+				</div>
+				
+				<div class = "col-sm-2" style="margin-top:28px;">
+					<a href="/expenses/new">New Expense</a>
+				</div>
+				<div class = "col-sm-2" style="margin-top:28px;">
+					<div  th:if="${displayDate} != null">
+						<a href="/expenses/down"><img th:src="@{images/arrow-left.png}"></a>
+						<b th:text="${displayDate}"></b>
+						<a href="/expenses/up"><img th:src="@{images/arrow-right.png}"></a>
+					</div>
+				</div>
+				<form id="search-form" method="get" th:action="@{/expenses/search}">
+					<div class = "col-sm-5">
+					    <input id="search-input" type="text" name="query" th:placeholder="${searchQuery}" th:value="*{query}" class="form-control" style="margin-top:20px;">
+				    </div>
+				</form>	
+			</div>
+			
+			<table class="table table-striped">
+				<tr>
+					<th>Store</th>
+					<th>Comment</th>
+					<th>Amount</th>
+					<th>Date</th>
+					<th>Type</th>
+					<th>Property</th>
+					<th>Receipt</th>
+					<th>Edit</th>
+					<th>Delete</th>
+				</tr>
+				<tr th:each="expense : ${expenses}">
+					
+					<td th:text="${expense.store}" />
+					<td th:text="${expense.comment}" />
+					<td th:text="${#numbers.formatDecimal(expense.amount, 0, 'COMMA', 2, 'POINT')}" />
+					<td th:text="${expense.date}" />
+					<td th:text="${expense.expenseType.name}" />
+					<td th:text="${expense.property.name}" />
+					<td><a
+						th:href="@{'/fetch-image?file=' + ${expense.receiptImage}}"
+						th:if="${expense.receiptImage}">View Image</a></td>
+					<td><a th:href="${'/expenses/edit/' + expense.id}">Edit</a></td>
+					<td><a th:href="${'/expenses/delete/' + expense.id}">Delete</a></td>
+				</tr>
+			</table>
+
+		</div>
+	</div>
+
+</body>
+</html>

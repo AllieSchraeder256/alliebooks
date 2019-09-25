@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+	<head lang="en">
+		<head lang="en">
+	    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+	    <link href="http://cdn.jsdelivr.net/webjars/bootstrap/3.3.4/css/bootstrap.min.css"
+	          th:href="@{/webjars/bootstrap/3.3.4/css/bootstrap.min.css}"
+	          rel="stylesheet" media="screen"/>
+	    <script src="http://cdn.jsdelivr.net/webjars/jquery/2.1.4/jquery.min.js"
+	            th:src="@{/webjars/jquery/2.1.4/jquery.min.js}"></script>
+	    <link href="../../static/css/main.css"
+	          th:href="@{css/main.css}" rel="stylesheet" media="screen"/>
+	</head>
+<body>
+
+<div class="container">
+    <div th:fragment="header">
+        <nav class="navbar navbar-default">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <a class="navbar-brand" href="#" th:href="@{/}">Alliebooks</a>
+                    <ul class="nav navbar-nav">
+                        <li><a href="#" th:href="@{/expenses}">Expenses</a></li>                        
+                        <li><a href="#" th:href="@{/rent-payments}">Rent Payments</a></li>
+                        <li><a href="#" th:href="@{/properties}">Properties</a></li>
+                        <li><a href="#" th:href="@{/reports}">Reports</a></li>
+                        <li><a href="#" th:href="@{/config}">Configure</a></li>
+                    </ul>
+
+                </div>
+            </div>
+        </nav>
+	</div>
+</div>
+</body>
+</html>

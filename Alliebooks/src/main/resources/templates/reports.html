@@ -1,0 +1,123 @@
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head lang="en">
+
+<title>Alliebooks</title>
+
+<!--/*/ <th:block th:include="fragments/headerinc :: head"></th:block> /*/-->
+</head>
+<body onload="summer()">
+
+	<script>
+		function summer() {
+			var table = document.getElementById('monthly-expense-table');
+			var total = 0;
+			
+			var rows = table.rows;
+			var  checkboxes = table.getElementsByTagName("INPUT");
+			for(var i = 1; i < rows.length - 1; i++) {
+				var sumCell = rows[i].cells[2].innerHTML;
+				if (checkboxes[i-1].checked) {
+					total += parseFloat(sumCell.replace(/,/g,''), 10);
+				}
+			}
+	    	document.getElementById('total-cell').innerHTML = total.toLocaleString(undefined, {minimumFractionDigits:2, maximumFractionDigits:2});
+		
+		
+	    	table = document.getElementById('revenue-and-loss-table');
+			var totalRev = 0;
+			var totalLoss = 0;
+			var totalSpread = 0;
+			
+			for(var i = 1; i < table.rows.length - 1; i++) {
+				var revCell = table.rows[i].cells[1].innerHTML;
+				totalRev += parseFloat(revCell.replace(/,/g,''), 10);
+				
+				var lossCell = table.rows[i].cells[2].innerHTML;
+				totalLoss += parseFloat(lossCell.replace(/,/g,''), 10);
+				
+				var spreadCell = table.rows[i].cells[3].innerHTML;
+				totalSpread += parseFloat(spreadCell.replace(/,/g,''), 10);
+			}
+			setFormattedValue(totalSpread, 'total-revenue');
+			setFormattedValue(totalSpread, 'total-loss');
+	    	setFormattedValue(totalSpread, 'total-spread');
+		}
+		
+		function setFormattedValue(f, elementId) {
+			document.getElementById(elementId).innerHTML = f.toLocaleString(undefined, {minimumFractionDigits:2, maximumFractionDigits:2});
+			if (f < 0) {
+	    		document.getElementById(elementId).style.color = 'red';
+	    	}
+		}
+	</script>
+
+	<div class="container">
+		<!--/*/ <th:block th:include="fragments/header :: header"></th:block> /*/-->
+		<div class="row">
+			<div class="col-sm-8">
+				<h2>Annual Revenue and Loss by Property</h2>
+			</div>
+
+			<div class="col-sm-4" style="margin-top: 28px;">
+				<a href="/reports/down"><img th:src="@{images/arrow-left.png}"></a>
+				<b th:text="${displayDate}"></b> <a href="/reports/up"><img
+					th:src="@{images/arrow-right.png}"></a>
+			</div>
+		</div>
+
+		<table id="revenue-and-loss-table" class="table table-striped">
+			<tr>
+				<th>Property</th>
+				<th>Revenue</th>
+				<th>Total Expenses</th>
+				<th>Spread</th>
+			</tr>
+			<tr th:each="rl : ${revenueAndLoss}">
+				<td th:text="${rl.propertyName}" />
+				<td th:text="${#numbers.formatDecimal(rl.revenue, 0, 'COMMA', 2, 'POINT')}" />
+				<td th:text="${#numbers.formatDecimal(rl.expenses, 0, 'COMMA', 2, 'POINT')}" />
+				<td th:style="${rl.spread < 0} ? ${'color: red;'}" th:text="${#numbers.formatDecimal(rl.spread, 0, 'COMMA', 2, 'POINT')}"></td>
+			</tr>
+			<tr id = "total-row">
+				<td />
+				<td id="total-revenue">0</td>
+				<td id="total-loss">0</td>
+				<td id="total-spread">0</td>
+			</tr>
+		</table>
+		
+		<p /><hr />
+		
+		<h2>Monthly Expenses by Property</h2>
+
+		<table id="monthly-expense-table" class="table table-striped">
+			<tr id = "title-row">
+				<th>Property</th>
+				<th>Type</th>
+				<th>Amount</th>
+				<th>Avg Monthly</th>
+				<th>Total</th>
+			</tr>
+			<tr id="content-row" th:each="ex : ${expenseByProperty}">
+				
+				<td th:text="${ex.propertyName}" />
+				<td th:text="${ex.expenseTypeName}" />
+				<td th:text="${#numbers.formatDecimal(ex.amount, 0, 'COMMA', 2, 'POINT')}" />
+				<td th:text="${#numbers.formatDecimal(ex.average, 0, 'COMMA', 2, 'POINT')}" />
+				<td><input type="checkbox" id="box" checked onclick="summer()"/></td>
+			</tr>
+			<tr id = "total-row">
+				<td />
+				<td />
+				<td />
+				<td />
+				<td id="total-cell">0</td>
+			</tr>
+		</table>
+		
+	</div>
+
+</body>
+</html>
