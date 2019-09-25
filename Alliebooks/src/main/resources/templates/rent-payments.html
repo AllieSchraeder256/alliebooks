@@ -20,11 +20,11 @@
 				<div class = "col-sm-2" style="margin-top:28px;">
 					<a href="/rent-payments/new">New Rent Payment</a>
 				</div>
-				<div class = "col-sm-2" style="margin-top:28px;">
+				<div class = "col-sm-2" style="margin-top:22px;">
 					<div  th:if="${displayDate} != null">
-						<a href="/rent-payments/down"><img th:src="@{images/arrow-left.png}"></a>
+						<a class="nav-arrow" href="/rent-payments/down">&#8592;<!-- <img th:src="@{images/arrow-left.png}"> --></a>
 						<b th:text="${displayDate}"></b>
-						<a href="/rent-payments/up"><img th:src="@{images/arrow-right.png}"></a>
+						<a class="nav-arrow" href="/rent-payments/up">&#8594; <!-- <img th:src="@{images/arrow-right.png}"> --></a>
 					</div>
 				</div>
 				<form id="search-form" method="get" th:action="@{/rent-payments/search}">

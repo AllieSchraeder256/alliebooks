@@ -18,8 +18,6 @@ public class SecurityConfiguration implements WebMvcConfigurer{
 	}
 
 	protected void configure(HttpSecurity http) throws Exception {
-
 		http.antMatcher("/").authorizeRequests().anyRequest().hasRole("ADMIN").and().httpBasic();
 	}
-
 }

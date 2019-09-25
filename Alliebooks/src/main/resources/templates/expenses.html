@@ -20,11 +20,11 @@
 				<div class = "col-sm-2" style="margin-top:28px;">
 					<a href="/expenses/new">New Expense</a>
 				</div>
-				<div class = "col-sm-2" style="margin-top:28px;">
+				<div class = "col-sm-2" style="margin-top:22px;">
 					<div  th:if="${displayDate} != null">
-						<a href="/expenses/down"><img th:src="@{images/arrow-left.png}"></a>
+						<a class="nav-arrow" href="/expenses/down">&#8592;<!-- <img th:src="@{images/arrow-left.png}"> --></a>
 						<b th:text="${displayDate}"></b>
-						<a href="/expenses/up"><img th:src="@{images/arrow-right.png}"></a>
+						<a class="nav-arrow" href="/expenses/up">&#8594; <!-- <img th:src="@{images/arrow-right.png}"> --></a>
 					</div>
 				</div>
 				<form id="search-form" method="get" th:action="@{/expenses/search}">
@@ -64,6 +64,5 @@
 
 		</div>
 	</div>
-
 </body>
 </html>

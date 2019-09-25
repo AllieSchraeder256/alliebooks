@@ -60,11 +60,13 @@
 				<h2>Annual Revenue and Loss by Property</h2>
 			</div>
 
-			<div class="col-sm-4" style="margin-top: 28px;">
-				<a href="/reports/down"><img th:src="@{images/arrow-left.png}"></a>
-				<b th:text="${displayDate}"></b> <a href="/reports/up"><img
-					th:src="@{images/arrow-right.png}"></a>
-			</div>
+			<div class = "col-sm-2" style="margin-top:22px;">
+					<div  th:if="${displayDate} != null">
+						<a class="nav-arrow" href="/reports/down">&#8592;<!-- <img th:src="@{images/arrow-left.png}"> --></a>
+						<b th:text="${displayDate}"></b>
+						<a class="nav-arrow" href="/reports/up">&#8594; <!-- <img th:src="@{images/arrow-right.png}"> --></a>
+					</div>
+				</div>
 		</div>
 
 		<table id="revenue-and-loss-table" class="table table-striped">
@@ -90,14 +92,14 @@
 		
 		<p /><hr />
 		
-		<h2>Monthly Expenses by Property</h2>
+		<h2>Annual Expenses by Property</h2>
 
 		<table id="monthly-expense-table" class="table table-striped">
 			<tr id = "title-row">
 				<th>Property</th>
 				<th>Type</th>
 				<th>Amount</th>
-				<th>Avg Monthly</th>
+				<th>12m Average</th>
 				<th>Total</th>
 			</tr>
 			<tr id="content-row" th:each="ex : ${expenseByProperty}">
