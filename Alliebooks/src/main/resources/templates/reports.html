@@ -13,6 +13,7 @@
 		function summer() {
 			var table = document.getElementById('monthly-expense-table');
 			var total = 0;
+			var monthlyTotal = 0;
 			
 			var rows = table.rows;
 			var  checkboxes = table.getElementsByTagName("INPUT");
@@ -21,9 +22,15 @@
 				if (checkboxes[i-1].checked) {
 					total += parseFloat(sumCell.replace(/,/g,''), 10);
 				}
+				
+				var sumCell2 = rows[i].cells[3].innerHTML;
+				if (checkboxes[i-1].checked) {
+					monthlyTotal += parseFloat(sumCell2.replace(/,/g,''), 10);
+				}
 			}
 	    	document.getElementById('total-cell').innerHTML = total.toLocaleString(undefined, {minimumFractionDigits:2, maximumFractionDigits:2});
-		
+	    	document.getElementById('monthly-total-cell').innerHTML = monthlyTotal.toLocaleString(undefined, {minimumFractionDigits:2, maximumFractionDigits:2});
+
 		
 	    	table = document.getElementById('revenue-and-loss-table');
 			var totalRev = 0;
@@ -40,8 +47,8 @@
 				var spreadCell = table.rows[i].cells[3].innerHTML;
 				totalSpread += parseFloat(spreadCell.replace(/,/g,''), 10);
 			}
-			setFormattedValue(totalSpread, 'total-revenue');
-			setFormattedValue(totalSpread, 'total-loss');
+			setFormattedValue(totalRev, 'total-revenue');
+			setFormattedValue(totalLoss, 'total-loss');
 	    	setFormattedValue(totalSpread, 'total-spread');
 		}
 		
@@ -113,9 +120,9 @@
 			<tr id = "total-row">
 				<td />
 				<td />
-				<td />
-				<td />
 				<td id="total-cell">0</td>
+				<td id="monthly-total-cell">0</td>
+				<td />
 			</tr>
 		</table>
 		

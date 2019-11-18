@@ -71,6 +71,8 @@ public class PropertyController {
         return "properties";
     }
 	
+	//TODO this is hard coded for 2 units, make it less shitty
+	
 	@RequestMapping("/properties/new")
     public String newProperty(Model model){
 		model.addAttribute("action", "Add");

@@ -20,6 +20,7 @@ public class ImageController {
 	@Autowired
 	private ImageService imageService;
 	
+	//TODO why throw all them exceptions?
 	@GetMapping(value = "/fetch-image")
 	  public void showImage(@RequestParam("file") String file, HttpServletResponse response,HttpServletRequest request) throws IOException, SQLException {
 		

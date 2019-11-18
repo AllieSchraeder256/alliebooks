@@ -105,7 +105,7 @@ public class Unit {
 
 	@Override
 	public String toString() {
-		return "Unit [id=" + id + ", name=" + name + ", currentTenant=" + currentTenant + ", currentRent=" + currentRent + ", propertyId=" + propertyId + ", property=" + property + "]";
+		return "Unit [id=" + id + ", name=" + name + ", currentTenant=" + currentTenant + ", currentRent=" + currentRent + ", propertyId=" + propertyId +"]";
 	}
 	
 }

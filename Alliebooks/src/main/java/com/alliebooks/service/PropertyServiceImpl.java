@@ -41,6 +41,7 @@ public class PropertyServiceImpl implements PropertyService {
 		return propertyRepo.findById(id).get();
 	}
 
+	//TODO make this soft delete because if there are any payments or expenses associated with the property or unit, it won't go
 	public void delete(UUID id) {
 		Optional<Property> property = propertyRepo.findById(id);
 		if (property.isPresent()) {

@@ -3,6 +3,8 @@ package com.alliebooks.controller;
 import java.beans.PropertyEditorSupport;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.UUID;
 
 import org.apache.commons.lang3.StringUtils;
@@ -20,6 +22,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.alliebooks.Utils;
 import com.alliebooks.entities.RentPayment;
+import com.alliebooks.entities.Unit;
+import com.alliebooks.fbo.UnitInfo;
 import com.alliebooks.service.RentPaymentService;
 import com.alliebooks.service.UnitService;
 
@@ -72,7 +76,6 @@ public class RentPaymentController {
 	
 	@GetMapping(value = "/rent-payments/down")
     public String down(Model model){
-		//TODO get current month and year values
 		if (--month < 1) {
 			month = 12;
 			year--;
@@ -88,8 +91,7 @@ public class RentPaymentController {
 	}
 	
 	@GetMapping(value = "/rent-payments/up")
-    public String up(Model model){
-		//TODO get current month and year values
+    public String up(Model model){ //TODO I don't like this
 		if (++month >12) {
 			month = 1;
 			year++;
@@ -98,10 +100,26 @@ public class RentPaymentController {
     }
 	
 	@RequestMapping("/rent-payments/new")
-    public String newRentPayment(Model model){
+    public String rentPaymentSelectUnit(Model model){
+		Iterable<Unit> units = unitService.findAll();
+		
+		model.addAttribute("units", units);
+        return "rent-payments-unit-form";
+    }
+	
+	@RequestMapping("/rent-payments/new/{id}")
+    public String newRentPayment(Model model, @PathVariable("id") UUID unitId){
+		Unit unit = unitService.findById(unitId);
+		
+		RentPayment rentPayment = new RentPayment();
+		rentPayment.setAmount(unit.getCurrentRent());
+		rentPayment.setTenant(unit.getCurrentTenant());
+		rentPayment.setUnit(unit);
+		rentPayment.setUnitId(unitId);
+		
 		model.addAttribute("action", "Add");
-		model.addAttribute("units", unitService.findAll());
-		model.addAttribute("rentPayment", new RentPayment());
+		model.addAttribute("displayName", unit.getProperty().getName() + " - " + unit.getName());
+		model.addAttribute("rentPayment", rentPayment);
         return "rent-paymentsform";
     }
 	

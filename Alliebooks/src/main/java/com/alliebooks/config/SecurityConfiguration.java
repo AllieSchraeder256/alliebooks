@@ -13,6 +13,7 @@ public class SecurityConfiguration implements WebMvcConfigurer{
 	@Bean
 	public UserDetailsService userDetailsService() throws Exception {
 		InMemoryUserDetailsManager manager = new InMemoryUserDetailsManager();
+		//TODO lol what's security?
 		manager.createUser(User.withDefaultPasswordEncoder().username("allie").password("hello").roles("USER").build());
 		return manager;
 	}

@@ -67,7 +67,7 @@ public class ConfigController {
         return "redirect:/config";
     }
 	
-	@RequestMapping("/config/expense-types/edit/{id}")//TODO make modal
+	@RequestMapping("/config/expense-types/edit/{id}")//TODO make this modal or something
     public String editExpense(@PathVariable("id") UUID id, Model model){
 		ExpenseType type = expenseTypeService.findById(id);
 		model.addAttribute("expenseTypes", expenseTypeService.findAll());
