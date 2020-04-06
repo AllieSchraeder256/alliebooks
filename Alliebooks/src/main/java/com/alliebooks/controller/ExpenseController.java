@@ -76,7 +76,7 @@ public class ExpenseController {
 	
 	@GetMapping(value = "/expenses/down")
     public String down(Model model){
-		if (--month < 1) {
+		if (--month < 1) {//TODO I don't like how this works
 			month = 12;
 			year--;
 		}
@@ -86,7 +86,8 @@ public class ExpenseController {
 	private String getExpenses(Model model) {
 		model.addAttribute("displayDate", Utils.getDisplayForMonth(month) + " " + year);
 		model.addAttribute("searchQuery", "Search");
-        model.addAttribute("expenses", expenseService.findAllByDate(month, year));
+        Iterable<Expense> ex = expenseService.findAllByDate(month, year);
+		model.addAttribute("expenses", ex);
         return "expenses";
 	}
 	

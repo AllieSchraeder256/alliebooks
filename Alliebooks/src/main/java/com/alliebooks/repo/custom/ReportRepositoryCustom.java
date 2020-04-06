@@ -5,5 +5,5 @@ import java.util.List;
 import com.alliebooks.entities.RoiReport;
 
 public interface ReportRepositoryCustom {
-	public List<RoiReport> getPropertyRoiReport();
+	public List<RoiReport> getPropertyRoiReport(int monthsBack);
 }

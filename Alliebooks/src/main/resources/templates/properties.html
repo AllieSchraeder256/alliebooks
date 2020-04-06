@@ -29,10 +29,14 @@
 						<p th:each="unit : ${property.units}"
 							th:text="${unit.name} + ' - ' + ${unit.currentTenant} +' - ' + ${#numbers.formatDecimal(unit.currentRent, 0, 'COMMA', 2, 'POINT')}" />
 					</div>
-					<div class="col-sm-6">
+					<div class="col-sm-3">
 						<p th:if="${property.roiReport} != null" th:text="'ROI: ' + ${property.roiReport?.roi} + '%'">
-						<p th:if="${property.roiReport} != null" th:text="'Expenses: ' + ${#numbers.formatDecimal(property.roiReport?.expenses, 0, 'COMMA', 2, 'POINT')}">
-						<p th:if="${property.roiReport} != null" th:text="'Income: ' + ${#numbers.formatDecimal(property.roiReport?.income, 0, 'COMMA', 2, 'POINT')}">
+						<p th:if="${property.roiReport} != null" th:text="'NOI: $' + ${#numbers.formatDecimal(property.roiReport?.noi, 0, 'COMMA', 2, 'POINT')}">
+						<p th:if="${property.roiReport} != null" th:text="'Total Expenses: $' + ${#numbers.formatDecimal(property.roiReport?.expenses, 0, 'COMMA', 2, 'POINT')}">
+					</div>
+					<div class="col-sm-3">
+						<p th:if="${property.roiReport} != null" th:text="'Operating Expenses: $' + ${#numbers.formatDecimal(property.roiReport?.operatingExpenses, 0, 'COMMA', 2, 'POINT')}">
+						<p th:if="${property.roiReport} != null" th:text="'Operating Income: $' + ${#numbers.formatDecimal(property.roiReport?.operatingIncome, 0, 'COMMA', 2, 'POINT')}">
 					</div>
 				</div>
 				<hr>

@@ -19,12 +19,12 @@
 			var  checkboxes = table.getElementsByTagName("INPUT");
 			for(var i = 1; i < rows.length - 1; i++) {
 				var sumCell = rows[i].cells[2].innerHTML;
-				if (checkboxes[i-1].checked) {
+				if (checkboxes[i].checked) {
 					total += parseFloat(sumCell.replace(/,/g,''), 10);
 				}
 				
 				var sumCell2 = rows[i].cells[3].innerHTML;
-				if (checkboxes[i-1].checked) {
+				if (checkboxes[i].checked) {
 					monthlyTotal += parseFloat(sumCell2.replace(/,/g,''), 10);
 				}
 			}
@@ -58,6 +58,15 @@
 	    		document.getElementById(elementId).style.color = 'red';
 	    	}
 		}
+		
+		function checkAll() {
+			var table = document.getElementById('monthly-expense-table');
+			var checkboxes = table.getElementsByTagName("INPUT");
+			
+			for(var i = 1; i < table.rows.length - 1; i++) {
+				checkboxes[i].checked = checkboxes[0].checked;
+			}
+		}
 	</script>
 
 	<div class="container">
@@ -81,7 +90,7 @@
 				<th>Property</th>
 				<th>Revenue</th>
 				<th>Total Expenses</th>
-				<th>Spread</th>
+				<th>Profit/Loss</th>
 			</tr>
 			<tr th:each="rl : ${revenueAndLoss}">
 				<td th:text="${rl.propertyName}" />
@@ -107,7 +116,7 @@
 				<th>Type</th>
 				<th>Amount</th>
 				<th>12m Average</th>
-				<th>Total</th>
+				<th><input type="checkbox" id="allCheckBox" checked onclick="checkAll()"/> Total</th>
 			</tr>
 			<tr id="content-row" th:each="ex : ${expenseByProperty}">
 				

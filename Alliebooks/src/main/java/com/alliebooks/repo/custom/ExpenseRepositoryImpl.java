@@ -33,6 +33,7 @@ public class ExpenseRepositoryImpl implements ExpenseRepositoryCustom {
 			d1 = fmt.parse(String.format("%s-%s-01", year, month));
 			if (++month == 13) {
 				month = 1;
+				year++;
 			}
 			d2 = fmt.parse(String.format("%s-%s-01", year, month));
 			

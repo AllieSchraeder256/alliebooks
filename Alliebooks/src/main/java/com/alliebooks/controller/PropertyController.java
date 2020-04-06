@@ -56,19 +56,18 @@ public class PropertyController {
 	    });
 	}
 	
-	@GetMapping(value = "/properties")
-    public String list(Model model){
+	@GetMapping(value = "/properties/{monthsBack}")
+    public String list(Model model, @PathVariable("monthsBack") Integer monthsBack){
 		Iterable<Property> properties = propertyService.findAll();
-		for(Property p : properties) {
-			for (RoiReport r : reportService.getPropertyRoiReport()) {
-				if (r.getId().equals(p.getId())) {
-					p.setRoiReport(r);
-				}
-			}
-		}
+		reportService.setPropertyRoiReports(properties, monthsBack);
 		
         model.addAttribute("properties", properties);
         return "properties";
+    }
+	
+	@GetMapping(value = "/properties")
+    public String list(Model model){
+        return list(model, 12);
     }
 	
 	//TODO this is hard coded for 2 units, make it less shitty
