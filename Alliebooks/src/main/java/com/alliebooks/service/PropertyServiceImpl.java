@@ -29,11 +29,12 @@ public class PropertyServiceImpl implements PropertyService {
 
 	public void save(Property property) {
 		imageService.saveImage(property);
+		
 		propertyRepo.save(property);
 		for(Unit u : property.getUnits()) {
 			u.setPropertyId(property.getId());
 			u.setProperty(property);
-			unitRepo.save(u);
+			//unitRepo.save(u);
 		}
 	}
 

@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.alliebooks.entities.Property;
-import com.alliebooks.entities.RoiReport;
+import com.alliebooks.service.ImageService;
 import com.alliebooks.service.PropertyService;
 import com.alliebooks.service.ReportService;
 
@@ -30,6 +30,9 @@ public class PropertyController {
 	
 	@Autowired
 	private ReportService reportService;
+	
+	@Autowired
+	ImageService imageService;
 	
 	@InitBinder
 	public void initBinder(WebDataBinder binder)

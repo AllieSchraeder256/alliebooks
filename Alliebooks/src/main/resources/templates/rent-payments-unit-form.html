@@ -1,0 +1,35 @@
+  <!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head lang="en">
+
+    <title>Alliebooks</title>
+
+    <!--/*/ <th:block th:include="fragments/headerinc :: head"></th:block> /*/-->
+    
+</head>
+<body>
+<div class="container">
+    <!--/*/ <th:block th:include="fragments/header :: header"></th:block> /*/-->
+ 	<div>
+    	<h2>Select Unit for Rent Payment</h2>
+    	
+    	
+    	<table class="table table-striped">
+				<tr>
+					<th>Unit</th>
+					<th>Tenant</th>
+					<th>Current Rent</th>
+					<th>New</th>
+				</tr>
+				<tr th:each="unit : ${units}">
+					
+					<td th:text="${unit.name} + ' - ' + ${unit.property.name}" />
+					<td th:text="${unit.currentTenant}" />
+					<td th:text="${#numbers.formatDecimal(unit.currentRent, 0, 'COMMA', 2, 'POINT')}" />
+					<td><a th:href="${'/rent-payments/new/' + unit.id}">New Payment</a></td>
+				</tr>
+			</table>
+ 	 </div>
+</div>
+</body>
+</html>
