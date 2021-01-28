@@ -25,6 +25,9 @@
                         <li><a href="#" th:href="@{/properties}">Properties</a></li>
                         <li><a href="#" th:href="@{/reports}">Reports</a></li>
                         <li><a href="#" th:href="@{/config}">Configure</a></li>
+                        <li sec:authorize="!isAuthenticated()"><a href="#" th:href="@{/user/registration}">Sign Up</a></li>
+                        <li sec:authorize="!isAuthenticated()"><a href="#" th:href="@{/login}">Log In</a></li>
+                        <li sec:authorize="isAuthenticated()"><a href="#" th:href="@{/user-profile}" sec:authentication="name">Your Profile</a></li>
                     </ul>
 
                 </div>

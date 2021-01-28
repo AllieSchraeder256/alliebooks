@@ -18,15 +18,8 @@ import org.springframework.web.multipart.MultipartFile;
 @Entity
 @Table(name="properties")
 @RestResource
-public class Property {
-	@Column(name="id", updatable = false, nullable = false)
-	@Id
-	@GeneratedValue(generator = "UUID")
-	@GenericGenerator(
-		name = "UUID",
-		strategy = "org.hibernate.id.UUIDGenerator"
-	)
-	private UUID id;
+public class Property extends BaseModel {
+
 	@Column(name="name")
 	private String name;
 	
@@ -51,13 +44,6 @@ public class Property {
 
 	public void setImageHelper(MultipartFile imageHelper) {
 		this.imageHelper = imageHelper;
-	}
-	
-	public UUID getId() {
-		return id;
-	}
-	public void setId(UUID id) {
-		this.id = id;
 	}
 	public String getName() {
 		return name;
@@ -97,6 +83,6 @@ public class Property {
 
 	@Override
 	public String toString() {
-		return "Property [id=" + id + ", name=" + name + ", units=" + units + "]";
+		return "Property [name=" + name + ", units=" + units + "]";
 	}
 }

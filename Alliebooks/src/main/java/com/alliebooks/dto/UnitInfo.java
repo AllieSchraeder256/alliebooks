@@ -1,4 +1,4 @@
-package com.alliebooks.fbo;
+package com.alliebooks.dto;
 
 public class UnitInfo {
 	private String tenantName;

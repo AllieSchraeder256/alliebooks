@@ -6,10 +6,13 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
+import org.hibernate.annotations.Type;
+
 @Entity
 public class RoiReport {
 
 	@Id
+	@Type(type="uuid-char")
 	private UUID id;
 	private double expenses;
 	private double roi;

@@ -16,12 +16,7 @@ import org.springframework.data.rest.core.annotation.RestResource;
 @Entity
 @Table(name="expense_types")
 @RestResource
-public class ExpenseType {
-	@Column(name="id", updatable = false, nullable = false)
-	@Id
-	@GeneratedValue(generator = "UUID")
-	@GenericGenerator(name = "UUID", strategy = "org.hibernate.id.UUIDGenerator")
-	private UUID id;
+public class ExpenseType extends BaseModel {
 	
 	@Column(name="name")
 	private String name;
@@ -31,14 +26,6 @@ public class ExpenseType {
 	
 	@OneToMany(mappedBy="expenseType")
 	private List<Expense> expenses;
-
-	public UUID getId() {
-		return id;
-	}
-
-	public void setId(UUID id) {
-		this.id = id;
-	}
 
 	public String getName() {
 		return name;
@@ -66,6 +53,6 @@ public class ExpenseType {
 
 	@Override
 	public String toString() {
-		return "ExpenseType [id=" + id + ", name=" + name + "]";
+		return "ExpenseType [name=" + name + "]";
 	}
 }

@@ -15,6 +15,7 @@ import javax.persistence.TemporalType;
 import javax.persistence.Transient;
 
 import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.Type;
 import org.springframework.data.rest.core.annotation.RestResource;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.multipart.MultipartFile;
@@ -22,13 +23,7 @@ import org.springframework.web.multipart.MultipartFile;
 @Entity
 @Table(name="expenses")
 @RestResource
-public class Expense {
-	@Column(name="id", updatable = false, nullable = false)
-	@Id
-	@GeneratedValue(generator = "UUID")
-	@GenericGenerator(name = "UUID", strategy = "org.hibernate.id.UUIDGenerator")
-	private UUID id;
-	
+public class Expense extends BaseModel {
 	@Column(name="store")
 	private String store;
 	
@@ -47,6 +42,7 @@ public class Expense {
 	private String receiptImage;
 	
 	@Column(name="expense_type_id")
+	//@Type(type="uuid-char")
 	private UUID expenseTypeId;
 	
 	@ManyToOne
@@ -54,6 +50,7 @@ public class Expense {
 	private ExpenseType expenseType;
 
 	@Column(name="property_id")
+	//@Type(type="uuid-char")
 	private UUID propertyId;
 	
 	@ManyToOne
@@ -69,14 +66,6 @@ public class Expense {
 
 	public void setImageHelper(MultipartFile imageHelper) {
 		this.imageHelper = imageHelper;
-	}
-	
-	public UUID getId() {
-		return id;
-	}
-
-	public void setId(UUID id) {
-		this.id = id;
 	}
 
 	public String getStore() {
@@ -155,7 +144,7 @@ public class Expense {
 
 	@Override
 	public String toString() {
-		return "Expense [id=" + id + ", store=" + store + ", comment=" + comment + ", date=" + date + ", amount=" + amount + ", expenseTypeId=" + expenseTypeId
+		return "Expense [store=" + store + ", comment=" + comment + ", date=" + date + ", amount=" + amount + ", expenseTypeId=" + expenseTypeId
 				+ "]";
 	}
 }

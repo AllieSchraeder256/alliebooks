@@ -10,14 +10,14 @@ import com.alliebooks.repo.UnitRepository;
 
 @Service
 public class UnitServiceImpl implements UnitService {
-	
+
 	@Autowired
 	private UnitRepository unitRepo;
 
 	public Iterable<Unit> findAll() {
 		return unitRepo.findAll();
 	}
-	
+
 	public Unit findById(UUID id) {
 		return unitRepo.findById(id).get();
 	}

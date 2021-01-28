@@ -34,7 +34,7 @@ public class PropertyServiceImpl implements PropertyService {
 		for(Unit u : property.getUnits()) {
 			u.setPropertyId(property.getId());
 			u.setProperty(property);
-			//unitRepo.save(u);
+			unitRepo.save(u);
 		}
 	}
 

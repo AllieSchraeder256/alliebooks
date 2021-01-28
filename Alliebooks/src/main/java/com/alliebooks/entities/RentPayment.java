@@ -15,6 +15,7 @@ import javax.persistence.TemporalType;
 import javax.persistence.Transient;
 
 import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.Type;
 import org.springframework.data.rest.core.annotation.RestResource;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.multipart.MultipartFile;
@@ -22,12 +23,7 @@ import org.springframework.web.multipart.MultipartFile;
 @Entity
 @Table(name="rent_payments")
 @RestResource
-public class RentPayment {
-	@Column(name="id", updatable = false, nullable = false)
-	@Id
-	@GeneratedValue(generator = "UUID")
-	@GenericGenerator(name = "UUID", strategy = "org.hibernate.id.UUIDGenerator")
-	private UUID id;
+public class RentPayment extends BaseModel {
 	
 	@Column(name="tenant")
 	private String tenant;
@@ -44,6 +40,7 @@ public class RentPayment {
 	private double amount;
 	
 	@Column(name="unit_id")
+	//@Type(type="uuid-char")
 	private UUID unitId;
 	
 	@ManyToOne
@@ -62,14 +59,6 @@ public class RentPayment {
 
 	public void setImageHelper(MultipartFile imageHelper) {
 		this.imageHelper = imageHelper;
-	}
-
-	public UUID getId() {
-		return id;
-	}
-
-	public void setId(UUID id) {
-		this.id = id;
 	}
 
 	public String getTenant() {
@@ -130,6 +119,6 @@ public class RentPayment {
 
 	@Override
 	public String toString() {
-		return "RentPayment [id=" + id + ", tenant=" + tenant + ", note=" + note + ", date=" + date + ", amount=" + amount + "]";
+		return "RentPayment [tenant=" + tenant + ", note=" + note + ", date=" + date + ", amount=" + amount + "]";
 	}
 }

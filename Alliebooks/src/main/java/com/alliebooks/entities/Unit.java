@@ -13,20 +13,13 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.Type;
 import org.springframework.data.rest.core.annotation.RestResource;
 
 @Entity
 @Table(name="units")
 @RestResource
-public class Unit {
-	@Column(name="id", updatable = false, nullable = false)
-	@Id
-	@GeneratedValue(generator = "UUID")
-	@GenericGenerator(
-		name = "UUID",
-		strategy = "org.hibernate.id.UUIDGenerator"
-	)
-	private UUID id;
+public class Unit extends BaseModel {
 	
 	@Column(name="name")
 	private String name;
@@ -38,6 +31,7 @@ public class Unit {
 	private double currentRent;
 	
 	@Column(name="property_id", insertable=false, updatable=false)
+	//@Type(type="uuid-char")
 	private UUID propertyId;
 	
 	@ManyToOne
@@ -54,15 +48,7 @@ public class Unit {
 	public void setProperty(Property property) {
 		this.property = property;
 	}
-
-	public UUID getId() {
-		return id;
-	}
-
-	public void setId(UUID id) {
-		this.id = id;
-	}
-
+	
 	public String getName() {
 		return name;
 	}
@@ -105,7 +91,7 @@ public class Unit {
 
 	@Override
 	public String toString() {
-		return "Unit [id=" + id + ", name=" + name + ", currentTenant=" + currentTenant + ", currentRent=" + currentRent + ", propertyId=" + propertyId +"]";
+		return "Unit [name=" + name + ", currentTenant=" + currentTenant + ", currentRent=" + currentRent + ", propertyId=" + propertyId +"]";
 	}
 	
 }

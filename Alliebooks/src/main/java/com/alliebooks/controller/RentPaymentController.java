@@ -21,9 +21,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.alliebooks.Utils;
+import com.alliebooks.dto.UnitInfo;
 import com.alliebooks.entities.RentPayment;
 import com.alliebooks.entities.Unit;
-import com.alliebooks.fbo.UnitInfo;
 import com.alliebooks.service.RentPaymentService;
 import com.alliebooks.service.UnitService;
 
