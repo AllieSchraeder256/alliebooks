@@ -14,8 +14,8 @@ public class ExpenseTypeServiceImpl implements ExpenseTypeService {
 	@Autowired
 	private ExpenseTypeRepository expenseTypeRepo;
 
-	public Iterable<ExpenseType> findAll() {
-		return expenseTypeRepo.findAll();
+	public Iterable<ExpenseType> findByActiveTrueOrderByName() {
+		return expenseTypeRepo.findByActiveTrueOrderByName();
 	}
 
 	public void save(ExpenseType expenseType) {

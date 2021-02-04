@@ -10,4 +10,6 @@ import com.alliebooks.entities.ExpenseType;
 @RepositoryRestResource(collectionResourceRel = "expense_types", path = "expense_types")
 public interface ExpenseTypeRepository extends CrudRepository<ExpenseType, UUID>{
 	
+	Iterable<ExpenseType> findByActiveTrueOrderByName();
+	
 }

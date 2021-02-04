@@ -24,6 +24,11 @@ import org.springframework.web.multipart.MultipartFile;
 @Table(name="expenses")
 @RestResource
 public class Expense extends BaseModel {
+	
+	public Expense() {
+		date = new Date();
+	}
+	
 	@Column(name="store")
 	private String store;
 	

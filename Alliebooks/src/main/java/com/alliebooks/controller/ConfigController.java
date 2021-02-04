@@ -53,7 +53,7 @@ public class ConfigController {
 	
 	@GetMapping(value = "/config")
     public String list(Model model){
-		model.addAttribute("expenseTypes", expenseTypeService.findAll());
+		model.addAttribute("expenseTypes", expenseTypeService.findByActiveTrueOrderByName());
 		return "config";
     }
 	
@@ -70,7 +70,7 @@ public class ConfigController {
 	@RequestMapping("/config/expense-types/edit/{id}")//TODO make this modal or something
     public String editExpense(@PathVariable("id") UUID id, Model model){
 		ExpenseType type = expenseTypeService.findById(id);
-		model.addAttribute("expenseTypes", expenseTypeService.findAll());
+		model.addAttribute("expenseTypes", expenseTypeService.findByActiveTrueOrderByName());
 		model.addAttribute("editExpenseType", type);
         return "config";
     }

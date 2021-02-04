@@ -104,7 +104,7 @@ public class ExpenseController {
     public String newExpense(Model model){
 		model.addAttribute("action", "Add");
 		model.addAttribute("properties", propertyService.findAll());
-		model.addAttribute("expenseTypes", expenseTypeService.findAll());
+		model.addAttribute("expenseTypes", expenseTypeService.findByActiveTrueOrderByName());
 		model.addAttribute("expense", new Expense());
         return "expenseform";
     }
@@ -132,7 +132,7 @@ public class ExpenseController {
     public String editExpense(@PathVariable("id") UUID id, Model model){
 		model.addAttribute("action", "Edit");
 		model.addAttribute("properties", propertyService.findAll());
-		model.addAttribute("expenseTypes", expenseTypeService.findAll());
+		model.addAttribute("expenseTypes", expenseTypeService.findByActiveTrueOrderByName());
 		model.addAttribute("expense", expenseService.getExpenseById(id));
         return "expenseform";
     }

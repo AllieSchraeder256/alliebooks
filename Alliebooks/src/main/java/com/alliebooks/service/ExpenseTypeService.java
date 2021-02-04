@@ -5,7 +5,7 @@ import java.util.UUID;
 import com.alliebooks.entities.ExpenseType;
 
 public interface ExpenseTypeService {
-	public Iterable<ExpenseType> findAll();
+	public Iterable<ExpenseType> findByActiveTrueOrderByName();
 
 	public void save(ExpenseType expenseType);
 
